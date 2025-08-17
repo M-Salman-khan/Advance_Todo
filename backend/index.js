@@ -1,5 +1,5 @@
 const express = require("express");
-const connectToMongoDB = require("./connection")
+const connectToMongoDB = require("./connection/connect")
 const app = express();
 const taskRoute = require("./routes/taskRoute") 
 const cors = require("cors"); 

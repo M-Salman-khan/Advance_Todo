@@ -13,7 +13,7 @@ const TaskList = () => {
     }
     return (
         <div className='mx-auto w-1/2'>
-            <h2 className='text-3xl font-bold my-3'>Todo</h2>
+            <h2 className='text-3xl font-bold my-3'>Add your todo</h2>
             <div className='w-full flex items-center justify-between'>
                 <input type="text" value={title} onKeyDown={handleKeyPress} onChange={(e) => setTitle(e.target.value)} className='flex-1 border px-4 py-1 rounded-sm w-full' />
                 <button onClick={() => {
