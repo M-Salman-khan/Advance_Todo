@@ -7,7 +7,7 @@ const TaskProvider = ({ children }) => {
     const [task, setTask] = useState([])
     const fetchData = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/task")
+            const res = await axios.get("http://localhost:3000/api/task")
             setTask(res.data)
             console.log(res)
             
@@ -23,7 +23,7 @@ const TaskProvider = ({ children }) => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/task/${id}`)
+            await axios.delete(`http://localhost:3000/api/task/${id}`)
             setTask((prev) => prev.filter((t) => t._id !== id))
         }
         catch (err) {
@@ -33,7 +33,7 @@ const TaskProvider = ({ children }) => {
 
     const addTask = async (title) => {
         try {
-            const res = await axios.post("http://localhost:3000/task", {
+            const res = await axios.post("http://localhost:3000/api/task", {
                 title: title,
             })
             setTask((prev) => [...prev, res.data])
@@ -44,7 +44,7 @@ const TaskProvider = ({ children }) => {
     }
     const handleEdit = async(id, title) => {
         try{
-            const res = await axios.patch(`http://localhost:3000/task/${id}`, {
+            const res = await axios.patch(`http://localhost:3000/api/task/${id}`, {
                 title: title
             })
             setTask((prev)=>prev.map((t)=>(t._id===id?res.data:t)))
