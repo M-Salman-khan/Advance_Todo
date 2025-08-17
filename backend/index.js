@@ -45,5 +45,15 @@ app.get("/task", async(req, res) => {
     res.status(400).json({error:err.message})
  }
 });
+app.delete("/task/:id", async(req, res) => {
+  try{
+    const task = await Task.findByIdAndDelete(req.params.id)
+    res.status(200).json(task)
+  }
+  catch(err){
+    res.status(400).json({error:err.message})
+  }
+});
+
 
 app.listen(PORT, () => console.log(`App is running on port ${PORT}`));

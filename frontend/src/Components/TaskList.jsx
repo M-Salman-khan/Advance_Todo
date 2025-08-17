@@ -1,51 +1,39 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios"
+import React, { useContext, useState } from 'react'
 import TaskItem from './TaskItem';
+import { TaskContext } from '../Context/TaskContext'
 
 const TaskList = () => {
+    const { handleDelete, handleEdit,  task, addTask } = useContext(TaskContext)
     const [title, setTitle] = useState("")
-    const [task, setTask] = useState([])
-    useEffect(() => {
-        axios.get("http://localhost:3000/task")
-            .then((response) => { setTask((prevTask) => [...prevTask, ...response.data]) })
-            .catch(err => console.log("Error occured : ", err))
-    }, [])
-    useEffect(() => {
-        console.log("Updated tasks: ", task);
-    }, [task]);
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-            const res = await axios.post("http://localhost:3000/task", {
-                title: title,
-            })
-            console.log("Task added Successfully")
-            setTask((prev) => [...prev, res.data]);
-            setTitle("")
-        }
-        catch (err) {
-            console.log("Error while adding task!", err);
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            addTask(title)
+            setTitle("");
         }
     }
     return (
         <div className='mx-auto w-1/2'>
             <h2 className='text-3xl font-bold my-3'>Todo</h2>
             <div className='w-full flex items-center justify-between'>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className='flex-1 border px-4 py-1 rounded-sm w-full' />
-                <button onClick={handleSubmit} className='border-1 px-4 py-1 rounded-sm ml-2 hover:bg-blue-500 hover:text-amber-100 hover:border-black'>Add Task</button>
+                <input type="text" value={title} onKeyDown={handleKeyPress} onChange={(e) => setTitle(e.target.value)} className='flex-1 border px-4 py-1 rounded-sm w-full' />
+                <button onClick={() => {
+                    if (title.trim()) {
+                        addTask(title);
+                        setTitle("");
+                    }
+                }} className='border-1 px-4 py-1 rounded-sm ml-2 hover:bg-gray-900 cursor-pointer hover:text-amber-100 hover:border-black'>Add Task</button>
             </div>
             <div>
                 <div>
-                    <h2 className='text-xl font-semibold my-3'>Task todo</h2>
+                    <h2 className='text-xl font-semibold my-3'>Bucket List</h2>
                 </div>
                 <div>
-                    <div>
+                    <div className={`flex w-full flex-col-reverse max-h-[60vh] overflow-auto`}>
                         {task.map((t) => (
-                            <TaskItem key={t._id} task={t.title} />
+                            <TaskItem key={t._id} task={t.title} handleEdit={handleEdit} deleteTask={handleDelete} id={t._id} />
                         ))}
                     </div>
+                    <button className={`float-right bg-white text-black px-3 py-1 mt-3 rounded border hover:bg-gray-800 cursor-pointer hover:text-amber-100 hover:border-black`}>Mark as Completed</button>
                 </div>
             </div>
         </div>

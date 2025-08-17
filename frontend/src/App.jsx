@@ -1,13 +1,13 @@
-import React from 'react'
 import Navbar from './Components/Navbar'
 import TaskItems from './Components/TaskList'
+import TaskProvider from './Context/TaskProvider'
 
 const App = () => {
   return (
-    <>
-    <Navbar/>
-    <TaskItems/>
-    </>
+    <TaskProvider>
+      <Navbar />
+      <TaskItems />
+    </TaskProvider>
   )
 }
 
