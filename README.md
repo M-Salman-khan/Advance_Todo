@@ -26,8 +26,8 @@ A full-stack web application for managing your daily tasks. Built with the **MER
 
 | Layer      | Technology         |
 |------------|--------------------|
-| Frontend   | React, Tailwind CSS, Axios |
-| Backend    | Node.js, Express.js, CORS  |
+| client   | React, Tailwind CSS, Axios |
+| server    | Node.js, Express.js, CORS  |
 | Database   | MongoDB (Mongoose)         |
 
 ---
@@ -36,8 +36,8 @@ A full-stack web application for managing your daily tasks. Built with the **MER
 
 ```
 Advance_Todo/
-├── backend/         # Node.js & Express.js API
-└── frontend/        # React.js App
+├── server/         # Node.js & Express.js API
+└── client/        # React.js App
 ```
 
 ---
@@ -66,22 +66,22 @@ To get a local copy up and running, follow these simple steps.
 
 ---
 
-### 🔙 Backend Setup
+### 🔙 server Setup
 
-1. **Navigate to the backend directory:**
+1. **Navigate to the server directory:**
     ```sh
-    cd backend
+    cd server
     ```
 2. **Install dependencies:**
     ```sh
     npm install
     ```
-3. **Create a `.env` file in `backend/` and add:**
+3. **Create a `.env` file in `server/` and add:**
     ```env
     PORT=3000
     MONGODB_URI=your_mongodb_connection_string
     ```
-4. **Start the backend server:**
+4. **Start the server server:**
     ```sh
     npm start
     ```
@@ -89,17 +89,17 @@ To get a local copy up and running, follow these simple steps.
 
 ---
 
-### 🔜 Frontend Setup
+### 🔜 client Setup
 
-1. **Open a new terminal and go to the frontend directory:**
+1. **Open a new terminal and go to the client directory:**
     ```sh
-    cd frontend
+    cd client
     ```
 2. **Install dependencies:**
     ```sh
     npm install
     ```
-3. **Start the frontend server:**
+3. **Start the client server:**
     ```sh
     npm start
     ```
